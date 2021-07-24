@@ -94,7 +94,7 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 ## Schéma de communication
 
 <p align="center">
-<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/schema-com.PNG" width="750" height="300" />
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/schema-com.png" width="750" height="300" />
 </p>
 
 
