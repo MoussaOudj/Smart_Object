@@ -52,7 +52,16 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 
 > Ci-dessus la fenêtre HomeBridge
 
-### Capteurs & composants
+### Capteurs & composants éléctroniques
+
+#### NodeMCU (ESP8266)
+
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/nodeMCU.png" width="250" height="250" />
+</p>
+
+> Microcontrolleur servant à faire l'interface entre les données des capteurs et le broker mqtt privé. La gestion des différents composant est traité et complié dans le microcontroleur. Le module nodeMCU est facile d'utilisation et d'accès.
+
 
 #### Water level sensor
 
@@ -84,7 +93,10 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 
 ## Schéma de communication
 
-> Schéma en cours.
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/schema-com.PNG" width="750" height="300" />
+</p>
+
 
 ## Code & Config
 
