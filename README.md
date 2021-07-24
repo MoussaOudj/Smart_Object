@@ -82,3 +82,13 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 
 > 4ème capteur à venir.
 
+## Schéma de communication
+
+> Schéma en cours.
+
+## Code & Config
+
+### [Code Arduino](https://github.com/MoussaOudj/Smart_Object/blob/master/Smart_Object_Projet.ino)
+
+### [Config Homebridge](https://github.com/MoussaOudj/Smart_Object/blob/master/HomebrigeConfig.json)
+
