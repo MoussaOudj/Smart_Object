@@ -66,6 +66,7 @@ void callback(String topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]);
     data += (char)payload[i];
   }
+  Serial.println();
 
   if (topic == "4moc/groupe5/led/rgb") {
     String red = getValue(data, ',', 0);
@@ -88,10 +89,16 @@ void callback(String topic, byte* payload, unsigned int length) {
     }
       RED_TEMP = red.toInt();
       GREEN_TEMP = green.toInt();
-      GREEN_TEMP = blue.toInt();
+      BLUE_TEMP = blue.toInt();
   } else if (topic == "4moc/groupe5/led/status") {
     RGB_STATUS = data;
     if (RGB_STATUS == "On") {
+      Serial.print("Red = ");
+      Serial.println(RED_TEMP);
+      Serial.print("Green = ");
+      Serial.println(GREEN_TEMP);
+      Serial.print("Blue = ");
+      Serial.println(BLUE_TEMP);
       analogWrite(redpin, RED_TEMP);
       analogWrite(greenpin, GREEN_TEMP);
       analogWrite(bluepin, BLUE_TEMP);
