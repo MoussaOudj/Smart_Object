@@ -1,0 +1,70 @@
+{
+    "bridge": {
+        "name": "Homebridge EF25",
+        "username": "0E:A7:C5:77:EF:30",
+        "port": 52178,
+        "pin": "033-45-155"
+    },
+    "accessories": [
+        {
+            "type": "motionSensor",
+            "name": "ShockSensor",
+            "url": "mqtt://localhost:1883",
+            "username": "esgi",
+            "password": "esgi4moc",
+            "topics": {
+                "getMotionDetected": "4moc/groupe5/shock/status"
+            },
+            "integerValue": true,
+            "onValue": "1",
+            "offValue": "0",
+            "turnOffAfterms": 5000,
+            "accessory": "mqttthing"
+        },
+        {
+            "accessory": "mqttthing",
+            "type": "temperatureSensor",
+            "name": "Water level sensor",
+            "url": "mqtt://localhost:1883",
+            "username": "esgi",
+            "password": "esgi4moc",
+            "topics": {
+                "getCurrentTemperature": "4moc/groupe5/water/level/value",
+                "getStatusActive": "4moc/groupe5/water/level/status",
+                "getStatusFault": "4moc/groupe5/water/level/status",
+                "getStatusTampered": "4moc/groupe5/water/level/status",
+                "getStatusLowBattery": "4moc/groupe5/water/level/status"
+            },
+            "minTemperature": 0,
+            "maxTemperature": 30
+        },
+        {
+            "accessory": "mqttthing",
+            "type": "lightbulb",
+            "name": "RGB_Elgoo_Led",
+            "url": "mqtt://localhost:1883",
+            "username": "esgi",
+            "password": "esgi4moc",
+            "topics": {
+                "getOn": "4moc/groupe5/led/status",
+                "setOn": "4moc/groupe5/led/status",
+                "getRGB": "4moc/groupe5/led/rgb",
+                "setRGB": "4moc/groupe5/led/rgb"
+            },
+            "integerValue": true,
+            "onValue": "On",
+            "offValue": "Off",
+            "hex": false,
+            "hexPrefix": false,
+            "minColorTemperature": 0,
+            "maxColorTemperature": 255
+        }
+    ],
+    "platforms": [
+        {
+            "name": "Config",
+            "port": 8181,
+            "platform": "config"
+        }
+    ]
+}
