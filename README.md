@@ -41,7 +41,7 @@ Mosquitto est un broker public et open-source mise à disposition pour la mise e
 >Logo mosquitto
 
 
-#### HomeBridge
+### HomeBridge
 >local endpoint : http://group5.local:8181/
 
 Le container Homebridge nous permet d'intégrer à des appareils domestiques intelligents qui ne prennent pas en charge nativement HomeKit. Il existe plus de 2 000 plugins Homebridge prenant en charge des milliers d'accessoires intelligents différents. Dans notre cas nous allons mettre en relation HomeBridge avec notre broker MQTT pour récuperer toutes les informations d'une station méteo et de l'afficher sur notre iPhone à l'aide du fameux plugin.
@@ -51,3 +51,34 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 </p>
 
 > Ci-dessus la fenêtre HomeBridge
+
+### Capteurs & composants
+
+#### Water level sensor
+
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/Water_st045.png" width="250" height="250" />
+</p>
+
+> Capteur qui permet de detecter et de donner une valeur du niveau de l'eau, nous allons utliser le thermostat pour afficher le niveau.
+
+#### Shock sensor
+
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/shock_sensor.png" width="250" height="250" />
+</p>
+
+> Capteur qui detecte un contact brusque, nous allons l'utiliser comme Motion Sensor.
+
+#### RGB Led
+
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/rgb_led_ky.png" width="250" height="250" />
+</p>
+
+> Module RGB qui permet de faire briller une led de la couleur choisi, nous allons utiliser le lightbulb pour intéragir avec
+
+#### À VENIR
+
+> 4ème capteur à venir.
+
