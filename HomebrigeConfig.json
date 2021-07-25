@@ -30,13 +30,13 @@
             "password": "esgi4moc",
             "topics": {
                 "getCurrentTemperature": "4moc/groupe5/water/level/value",
-                "getStatusActive": "4moc/groupe5/water/level/status",
-                "getStatusFault": "4moc/groupe5/water/level/status",
-                "getStatusTampered": "4moc/groupe5/water/level/status",
-                "getStatusLowBattery": "4moc/groupe5/water/level/status"
+                "getStatusActive": "4moc/groupe5/water/level/active",
+                "getStatusFault": "4moc/groupe5/water/level/fault",
+                "getStatusTampered": "4moc/groupe5/water/level/tampered",
+                "getStatusLowBattery": "4moc/groupe5/water/level/lowbattery"
             },
             "minTemperature": 0,
-            "maxTemperature": 30
+            "maxTemperature": 200
         },
         {
             "accessory": "mqttthing",
@@ -58,6 +58,40 @@
             "hexPrefix": false,
             "minColorTemperature": 0,
             "maxColorTemperature": 255
+        },
+        {
+            "accessory": "mqttthing",
+            "type": "switch",
+            "name": "Tilt switch",
+            "url": "mqtt://localhost:1883",
+            "username": "esgi",
+            "password": "esgi4moc",
+            "caption": "Tilt switch",
+            "topics": {
+                "getOn": "4moc/groupe5/led/status",
+                "setOn": "4moc/groupe5/led/status"
+            },
+            "integerValue": true,
+            "onValue": "On",
+            "offValue": "Off"
+        },
+        {
+            "accessory": "mqttthing",
+            "type": "garageDoorOpener",
+            "name": "Water level status",
+            "url": "mqtt://localhost:1883",
+            "username": "esgi",
+            "password": "esgi4moc",
+            "topics": {
+                "getCurrentDoorState": "4moc/groupe5/water/level/status"
+            },
+            "doorCurrentValues": [
+                "NOT DEEP",
+                "FEW",
+                "MEDIUM",
+                "DEEP",
+                "EXTREMLY DEEP"
+            ]
         }
     ],
     "platforms": [
