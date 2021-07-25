@@ -17,9 +17,9 @@ WiFiClient espClient;
 PubSubClient MQTTclient(espClient);
 
 int SHK_PIN = D3; //Pin for the shock sensor
-int shk; //Variable to store the shk reading
+
 int wtr = 0; //Variable to store the wtr reading
-int WTR_MAX_LEVEL = 30;
+int WTR_MAX_LEVEL = 100;
 int WTR_MIN_LEVEL = 0;
 
 int redpin = D5; //select the pin for the red LED
@@ -29,6 +29,9 @@ int RED_TEMP = 0;
 int GREEN_TEMP = 0;
 int BLUE_TEMP = 0;
 String RGB_STATUS = "Off";
+
+int TILT_PIN = D0;
+String tiltSwitchState = "Off";
 
 //Fonctions blink pour l'envoi
 void blinkOnBoardLed(){
@@ -99,6 +102,11 @@ void callback(String topic, byte* payload, unsigned int length) {
       Serial.println(GREEN_TEMP);
       Serial.print("Blue = ");
       Serial.println(BLUE_TEMP);
+      if(RED_TEMP == 0 &&  RED_TEMP == 0 && BLUE_TEMP == 0){
+        RED_TEMP = 1;
+        GREEN_TEMP = 1;
+        BLUE_TEMP = 1;
+      }
       analogWrite(redpin, RED_TEMP);
       analogWrite(greenpin, GREEN_TEMP);
       analogWrite(bluepin, BLUE_TEMP);
@@ -118,9 +126,8 @@ void MQTTsend() {
  MQTTclient.publish("4moc/groupe5/shock/status",String(1).c_str());
  MQTTclient.publish("4moc/groupe5/water/level/value",String(wtr).c_str());
 
- int range = map(wtr, WTR_MIN_LEVEL, WTR_MAX_LEVEL, 0, 3);
+ int range = map(wtr, WTR_MIN_LEVEL, WTR_MAX_LEVEL, 0, 4);
  String level_status = "NONE";
-
   // do something different depending on the range value:
   switch (range) {
     case 0:    // your hand is on the sensor
@@ -135,11 +142,17 @@ void MQTTsend() {
     case 3:    // your hand is nowhere near the sensor
       level_status = "DEEP";
       break;
+      case 4:    // your hand is nowhere near the sensor
+      level_status = "EXTREMLY DEEP";
+      break;
   }
-
    MQTTclient.publish("4moc/groupe5/water/level/status",level_status.c_str());
-  
- blinkOnBoardLed();
+   blinkOnBoardLed();
+}
+
+
+void MQTTsendTiltStatus() {
+   MQTTclient.publish("4moc/groupe5/led/status",tiltSwitchState.c_str());
 }
 
 //Fonction connection MQTT
@@ -165,10 +178,8 @@ void MQTTconnect() {
 
 //This is a function used to get the reading
 void readSensor() {
-  digitalWrite(WATER_SENSOR_POWER, HIGH);  // Turn the sensor ON
   delay(10);              // wait 10 milliseconds
   wtr = analogRead(WATER_LEVEL_PIN);    // Read the analog value form sensor
-  digitalWrite(WATER_SENSOR_POWER, LOW);   // Turn the sensor OFF
   Serial.print("water level : ");
   Serial.println(wtr);
 }
@@ -179,12 +190,12 @@ void setup()
   Serial.begin(115200);
   //Button + LED init
   pinMode(SHK_PIN, INPUT); //Make the pin you used an input on the Arduino
+  pinMode(TILT_PIN, INPUT); //Make the pin you used an input on the Arduino
   pinMode(LED_BUILTIN, OUTPUT);
   // Set D7 as an OUTPUT
   pinMode(WATER_SENSOR_POWER, OUTPUT);
   // Set to LOW so no power flows through the sensor
-  digitalWrite(WATER_SENSOR_POWER, LOW);
-  
+  digitalWrite(WATER_SENSOR_POWER, HIGH);
   // Conexion WIFI
    WiFi.begin(ssid, password);
    Serial.println("");
@@ -207,12 +218,23 @@ void loop()
   }
   MQTTclient.loop();
   delay(1); 
-  if(digitalRead(SHK_PIN) == LOW) //Read the shock sensor
+  int shkState = digitalRead(SHK_PIN);
+  int tiltState = digitalRead(TILT_PIN);
+  if( shkState == LOW) //Read the shock sensor
   {
     readSensor();
     Serial.println("Shock Detected"); //Print out that we have been shaken
     MQTTsend();
-    delay(1000); //Wait half a second before reading again
+  }
+  
+  String previousState = tiltSwitchState;
+  if (tiltState == LOW) {
+    tiltSwitchState = "On";
+  }else {
+    tiltSwitchState = "Off";
+  }
+  if(tiltSwitchState != previousState){
+  MQTTsendTiltStatus();
   }
   
 }
