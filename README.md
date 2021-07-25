@@ -87,9 +87,13 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 
 > Module RGB qui permet de faire briller une led de la couleur choisi, nous allons utiliser le lightbulb pour intéragir avec
 
-#### À VENIR
+#### Tilt Switch
 
-> 4ème capteur à venir.
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/tilt_switch.jpg" width="250" height="250" />
+</p>
+
+> Tilt switch qui permet d'intéragir avec le status ON/OFF de la led à traver le topic status
 
 ## Schéma de communication
 
@@ -104,3 +108,32 @@ Le container Homebridge nous permet d'intégrer à des appareils domestiques int
 
 ### [Config Homebridge](https://github.com/MoussaOudj/Smart_Object/blob/master/HomebrigeConfig.json)
 
+## Details sur fonctionnement 
+
+<p align="center">
+<img src="https://github.com/MoussaOudj/Smart_Object/blob/master/readme_ressources/homebridge_accessoires.png" width="750" height="300" />
+</p>
+
+**Water sensor :** 
+
+- Arduino : Recupere le niveau de l'eau et mapping des valeurs entre 0 et 200 ["NOT DEEP", "FEW", "DEEP"...] + envoi sur topic MQTT correspondant. **Dépendant du shock sensor**
+
+- Homebrige : On affiche le niveau à l'aide de l'accessoire temperatureSensor. La donnée est aussi utile à gérer les différentes ouvertures du garage à l'aide de notre mapping
+
+**Shock sensor :**
+
+- Arduino : Detecte le choque et envoie l'information au topic MQTT. Si un choque est actuellement en cours alors gérer le Water sensor
+
+- Homebrige : Le motion sensor est utilisé pour le shock sensor, affiche la présence quand un choque est detecté et se remet à l'etat off au bout de quelques secondes.
+
+**Tilt sensor :** 
+
+- Arduino : Detecte l'état du Switch (incliné/non incliné). L'état du switch est envoyé au topic status de la led RGB pour ce permettre de l'éteindre ou de l'allumer.
+
+- Homebrige : Switch sensor qui affiche l'état du switch.
+
+**Led rgb :** 
+
+- Arduino : Recupère les infromations du topic rgb alimenté par homebridge et alimente les différente leds RGB pour donner la couleur voulu. Soumise aussi au topic status pour gérer l'état ON / OFF
+
+- Homebrige : Le LightBulb est utilisé pour gérer  la reception et l'envoi des données RGB + l'état ON/OFF
