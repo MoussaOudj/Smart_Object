@@ -3,22 +3,22 @@
 
 # Table of Contents
 
-1. [Objectif](##Objectif )
-2. [Outils utilisés](##outils-utilisés)
-    2.1 [Raspberry Pi](#raspberry-pi)
-    2.2 [Portainer](#portainer)
-    2.3 [Moquitto](#mosquitto-broker)
-    2.4 [Homebridge](#homebridge)
-    2.5 [Capteurs & Composants](#capteurs--composants-éléctroniques)
-        2.5.1 [ESP](#nodemcu-esp8266)
-        2.5.2 [Water sensor](#water-level-sensor)
-        2.5.3 [Shock sensor](#shock-sensor)
-        2.5.4 [Led RGB](#rgb-led)
-        2.5.5 [Tilt Switch](#tilt-switch)
-3. [Code & Configurations](#code--config)
-    3.1 [Code Arduino](#code-arduino)
-    3.2 [Configuration Homebridge](#config-homebridge)
-4. [Détails](#details-sur-fonctionnement)
+### [Objectif](##Objectif )
+### [Outils utilisés](##outils-utilisés)
+- #### [Raspberry Pi](#raspberry-pi)
+- #### [Portainer](#portainer)
+- #### [Moquitto](#mosquitto-broker)
+- #### [Homebridge](#homebridge)
+- #### [Capteurs & Composants](#capteurs--composants-éléctroniques)
+    - ##### [ESP](#nodemcu-esp8266)
+    - ##### [Water sensor](#water-level-sensor)
+    - ##### [Shock sensor](#shock-sensor)
+    - ##### [Led RGB](#rgb-led)
+    - ##### [Tilt Switch](#tilt-switch)
+### [Code & Configurations](#code--config)
+- #### [Code Arduino](#code-arduino)
+- #### [Configuration Homebridge](#config-homebridge)
+### [Détails](#details-sur-fonctionnement)
 
 ## Objectif 
 
